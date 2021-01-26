@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 getUrlServer() {
-  return "http://192.168.0.104:80/guia/";
+  return "http://192.168.0.101:80/guia/";
 }
 
 getURLPatrocinadosRecentes({@required String filtro}) {

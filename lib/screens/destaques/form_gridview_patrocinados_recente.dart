@@ -103,7 +103,7 @@ class _FormViewPatrocinadosRecentementeState extends State<FormViewPatrocinadosR
                                                           color:
                                                           Theme.of(context)
                                                               .primaryColor,
-                                                          fontSize: 17.0,
+                                                          fontSize: 16.0,
                                                           fontWeight:
                                                           FontWeight.bold,
                                                         ),

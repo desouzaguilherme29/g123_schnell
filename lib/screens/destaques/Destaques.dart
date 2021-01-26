@@ -16,51 +16,52 @@ class _DestaquesState extends State<Destaques> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              shape: ContinuousRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(30),
-                      bottomRight: Radius.circular(30))),
-              expandedHeight: 250.0,
-              pinned: true,
-              flexibleSpace: FlexibleSpaceBar(
-                  titlePadding: EdgeInsets.fromLTRB(5, 0, 0, 20),
-                  collapseMode: CollapseMode.pin,
-                  centerTitle: false,
-                  background: _StoryView(),
-                  title: Container(
-                    decoration: BoxDecoration(
-                      borderRadius:  BorderRadius.only(
-                          topRight: Radius.circular(30),
-                          bottomRight: Radius.circular(30)),
-                      color: Color.fromRGBO(2, 30, 105, 0.8),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(3),
-                      child: Text(
-                        "Bem Vindo, Guilherme Antonio",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 13.0,
-                        ),
-                        textAlign: TextAlign.left,
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                shape: ContinuousRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(30),
+                        bottomRight: Radius.circular(30))),
+                expandedHeight: 250.0,
+                pinned: true,
+                flexibleSpace: FlexibleSpaceBar(
+                    titlePadding: EdgeInsets.fromLTRB(5, 0, 0, 20),
+                    collapseMode: CollapseMode.pin,
+                    centerTitle: false,
+                    background: _StoryView(),
+                    title: Container(
+                      decoration: BoxDecoration(
+                        borderRadius:  BorderRadius.only(
+                            topRight: Radius.circular(30),
+                            bottomRight: Radius.circular(30)),
+                        color: Color.fromRGBO(2, 30, 105, 0.8),
                       ),
-                    ),
-                  )),
-            ),
-          ];
-        },
-        body: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            PesquisaContato(),
-            FormViewPatrocinadosRecentemente(),
-            FormViewAddRecentemente()
-          ],
+                      child: Padding(
+                        padding: EdgeInsets.all(3),
+                        child: Text(
+                          "Bem Vindo, Guilherme Antonio",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 13.0,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                    )),
+              ),
+            ];
+          },
+          body: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              PesquisaContato(),
+              FormViewPatrocinadosRecentemente(),
+              FormViewAddRecentemente()
+            ],
+          ),
         ),
-      ),
+
     );
   }
 

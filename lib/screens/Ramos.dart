@@ -128,7 +128,7 @@ class _RamosState extends State<Ramos> {
                     Padding(
                       padding: EdgeInsets.all(10),
                       child: Text(
-                        snapshot.data[index]["descricao"].toString(),
+                        snapshot.data[index]["descricao"].toString().substring(0, (snapshot.data[index]["descricao"].toString()).length > 50 ? 50 : (snapshot.data[index]["descricao"].toString()).length),
                         style:
                         TextStyle(fontSize: 14, fontFamily: "sans-serif"),
                       ),
