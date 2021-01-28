@@ -60,7 +60,7 @@ class _FormViewPatrocinadosRecentementeState extends State<FormViewPatrocinadosR
                       ),
                       Container(
                           margin: EdgeInsets.all(5),
-                          height: 240,
+                          height: 250,
                           child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: snapshot.data.length,

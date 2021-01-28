@@ -61,7 +61,7 @@ class _FormViewAddRecentementeState extends State<FormViewAddRecentemente> {
                       ),
                       Container(
                           margin: EdgeInsets.all(5),
-                          height: 240,
+                          height: 252,
                           child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               itemCount: snapshot.data.length,

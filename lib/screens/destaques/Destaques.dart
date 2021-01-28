@@ -66,25 +66,28 @@ class _DestaquesState extends State<Destaques> {
   }
 
   Widget _StoryView() {
-    return StoryViewer(
-      padding: EdgeInsets.all(8),
-      backgroundColor: Colors.white,
-      ratio: StoryRatio.r16_9,
-      loop: true,
-      hasReply: false,
-      mediaFit: BoxFit.fill,
-      stories: [
-        StoryItemModel(
-            imageProvider: NetworkImage(
-                "https://g123.com.br/publicidade/centro/casaril.jpg")),
-        StoryItemModel(
-            imageProvider: NetworkImage(
-                "https://g123.com.br/publicidade/centro/centro2.gif"))
-      ],
-      userModel: UserModel(
-        username: "Guia Schnell",
-        profilePicture: Image.asset("imagens/logoempresaicone.png").image,
-      ),
+    return Padding(
+      padding: EdgeInsets.fromLTRB(0,24,0,0),
+      child: StoryViewer(
+        padding: EdgeInsets.all(8),
+        backgroundColor: Colors.white,
+        ratio: StoryRatio.r16_9,
+        loop: true,
+        hasReply: false,
+        mediaFit: BoxFit.fill,
+        stories: [
+          StoryItemModel(
+              imageProvider: NetworkImage(
+                  "https://g123.com.br/publicidade/centro/casaril.jpg")),
+          StoryItemModel(
+              imageProvider: NetworkImage(
+                  "https://g123.com.br/publicidade/centro/centro2.gif"))
+        ],
+        userModel: UserModel(
+          username: "Guia Schnell",
+          profilePicture: Image.asset("imagens/logoempresaicone.png").image,
+        ),
+      )
     );
   }
 }

@@ -49,6 +49,10 @@ dependencies:
   flutter_swiper : ^1.1.6
   url_launcher: ^5.5.0
   maps_launcher: ^1.2.2+2
+  auth_buttons: ^0.0.4
+  google_sign_in: ^4.5.9
+  firebase_core: ^0.7.0
+  firebase_auth: ^0.20.0+1
 
 dev_dependencies:
   flutter_test:
@@ -111,6 +115,9 @@ flutter:
     - imagens/logoempresaicone.png
     - imagens/iconesemfundo.png
     - imagens/logo_empresa.jpeg
+    - imagens/imagemlogin.png
+    - imagens/logo_empresa_icone-sem-fundo.png
+    - imagens/loginimagem.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
