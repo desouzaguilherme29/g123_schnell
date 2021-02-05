@@ -1,3 +1,4 @@
+import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:g123_schnell/screens/chamarWhats/ChamarWhats.dart';
 import 'package:g123_schnell/screens/Ramos.dart';
@@ -6,7 +7,6 @@ import 'package:g123_schnell/screens/Favoritos.dart';
 import 'package:g123_schnell/screens/RightMenu.dart';
 
 class HomePage extends StatefulWidget {
-
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
+  var _scaffoldKey = new GlobalKey<ScaffoldState>();
   int currentTab = 0;
   final List<Widget> screens = [
     Destaques(),
@@ -22,8 +23,7 @@ class _HomePageState extends State<HomePage>
     TelefonesUteis(),
   ];
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen =
-  Destaques();
+  Widget currentScreen = Destaques();
 
   @override
   void initState() {
@@ -43,7 +43,6 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    var _scaffoldKey = new GlobalKey<ScaffoldState>();
     return Scaffold(
       endDrawer: new Menu(),
       key: _scaffoldKey,
@@ -51,9 +50,9 @@ class _HomePageState extends State<HomePage>
         child: currentScreen,
         bucket: bucket,
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton:FloatingActionButton(
         child:
-          Image.asset("imagens/whatsapp.png"),
+        Image.asset("imagens/whatsapp.png"),
 
         backgroundColor: Color.fromRGBO(69, 199, 99, 1.0),
         onPressed: () {
@@ -61,141 +60,111 @@ class _HomePageState extends State<HomePage>
               context, MaterialPageRoute(builder: (context) => ChamarWhats()));
         },
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 10,
-        child: Container(
-          height: 60,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-                      setState(() {
-                        currentScreen =
-                            Destaques(); // if user taps on this dashboard tab will be active
-                        currentTab = 0;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.home,
-                          color: currentTab == 0
-                              ? Color.fromRGBO(208, 0, 27, 1.0)
-                              : Color.fromRGBO(2, 30, 105, 1.0),
-                        ),
-                        Text(
-                          'Início',
-                          style: TextStyle(
-                            color: currentTab == 0
-                                ? Color.fromRGBO(208, 0, 27, 1.0)
-                                : Color.fromRGBO(2, 30, 105, 1.0),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-                      setState(() {
-                        currentScreen =
-                            Ramos(); // if user taps on this dashboard tab will be active
-                        currentTab = 1;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.format_list_numbered,
-                          color: currentTab == 1
-                              ? Color.fromRGBO(208, 0, 27, 1.0)
-                              : Color.fromRGBO(2, 30, 105, 1.0),
-                        ),
-                        Text(
-                          'Ramos',
-                          style: TextStyle(
-                            color: currentTab == 1
-                                ? Color.fromRGBO(208, 0, 27, 1.0)
-                                : Color.fromRGBO(2, 30, 105, 1.0),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      bottomNavigationBar: BubbleBottomBar(
+        opacity: .2,
+        currentIndex: currentTab,
+        onTap: changePage,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+        elevation: 8,
+        fabLocation: BubbleBottomBarFabLocation.end,
+        //new
+        hasNotch: true,
+        //new
+        hasInk: true,
+        //new, gives a cute ink effect
+
+        items: <BubbleBottomBarItem>[
+          BubbleBottomBarItem(
+              backgroundColor: Colors.red,
+              icon: Icon(
+                Icons.dashboard,
+                color: Colors.black,
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-                      setState(() {
-                        currentScreen =
-                            TelefonesUteis(); // if user taps on this dashboard tab will be active
-                        currentTab = 2;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.local_hospital,
-                          color: currentTab == 2
-                              ? Color.fromRGBO(208, 0, 27, 1.0)
-                              : Color.fromRGBO(2, 30, 105, 1.0),
-                        ),
-                        Text(
-                          'Úteis',
-                          style: TextStyle(
-                            color: currentTab == 2
-                                ? Color.fromRGBO(208, 0, 27, 1.0)
-                                : Color.fromRGBO(2, 30, 105, 1.0),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-                      _scaffoldKey.currentState.openEndDrawer();
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.more_horiz,
-                          color: currentTab == 3
-                              ? Color.fromRGBO(208, 0, 27, 1.0)
-                              : Color.fromRGBO(2, 30, 105, 1.0),
-                        ),
-                        Text(
-                          'Mais',
-                          style: TextStyle(
-                            color: currentTab == 3
-                                ? Color.fromRGBO(208, 0, 27, 1.0)
-                                : Color.fromRGBO(2, 30, 105, 1.0),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
-        ),
+              activeIcon: Icon(
+                Icons.dashboard,
+                color: Colors.red,
+              ),
+              title: Text("Início")),
+          BubbleBottomBarItem(
+              backgroundColor: Colors.deepPurple,
+              icon: Icon(
+                Icons.format_list_bulleted,
+                color: Colors.black,
+              ),
+              activeIcon: Icon(
+                Icons.format_list_bulleted,
+                color: Colors.deepPurple,
+              ),
+              title: Text("Ramos")),
+          BubbleBottomBarItem(
+              backgroundColor: Colors.indigo,
+              icon: Icon(
+                Icons.local_hospital,
+                color: Colors.black,
+              ),
+              activeIcon: Icon(
+                Icons.local_hospital,
+                color: Colors.indigo,
+              ),
+              title: Text("Úteis")),
+          BubbleBottomBarItem(
+              backgroundColor: Colors.green,
+              icon: Icon(
+                Icons.menu,
+                color: Colors.black,
+              ),
+              activeIcon: Icon(
+                Icons.menu,
+                color: Colors.green,
+              ),
+              title: Text("Menu"))
+        ],
       ),
     );
+  }
+
+  void changePage(int index) {
+    var intPage;
+
+    switch (index) {
+      case 0:
+        {
+          setState(() {
+            currentScreen =
+                Destaques(); // if user taps on this dashboard tab will be active
+            currentTab = 0;
+          });
+        }
+
+        break;
+      case 1:
+        {
+          setState(() {
+            currentScreen =
+                Ramos(); // if user taps on this dashboard tab will be active
+            currentTab = 1;
+          });
+        }
+        break;
+      case 2:
+        {
+          setState(() {
+            currentScreen =
+                TelefonesUteis(); // if user taps on this dashboard tab will be active
+            currentTab = 2;
+          });
+        }
+        break;
+      case 3:
+        {
+          _scaffoldKey.currentState.openEndDrawer();
+          break;
+        }
+    }
+
+    setState(() {
+      currentTab = index;
+    });
   }
 }

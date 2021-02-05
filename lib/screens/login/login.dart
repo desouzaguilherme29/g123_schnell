@@ -49,7 +49,7 @@ class _LoginState extends State<Login> {
                   Spacer(),
                   Align(
                     alignment: Alignment.center,
-                    child: Image.asset('imagens/loginimagem.png',height: 240,),
+                    child: Image.asset('imagens/loginimagem.png',height: 220,),
                   ),
                   Spacer(),
                   Align(

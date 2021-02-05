@@ -16,32 +16,27 @@ class Menu extends StatelessWidget {
               ),
             ),
             decoration: BoxDecoration(
-              color: Color.fromRGBO(38, 36, 99, 1.0),
+              color: Color.fromRGBO(2, 30, 105, 1.0),
               image: DecorationImage(
                     fit: BoxFit.fill,
                     image: AssetImage('imagens/logo_empresa.jpeg'))
             ),
           ),
           ListTile(
-            leading: Icon(Icons.person, color: Color.fromRGBO(38, 36, 99, 1.0),),
-            title: Text('Dados Pessoais', style: TextStyle(fontSize: 16)),
+            leading: Icon(Icons.add_box, color: Color.fromRGBO(2, 30, 105, 1.0),),
+            title: Text('Incluir telefone', style: TextStyle(fontSize: 16)),
             onTap: () => {},
           ),
           ListTile(
-            leading: Icon(Icons.shopping_basket, color: Color.fromRGBO(38, 36, 99, 1.0)),
-            title: Text('Meus Pedidos', style: TextStyle(fontSize: 16)),
+            leading: Icon(Icons.location_on, color: Color.fromRGBO(2, 30, 105, 1.0)),
+            title: Text('Buscar CEP', style: TextStyle(fontSize: 16)),
             onTap: () => {},
           ),
           ListTile(
-            leading: Icon(Icons.local_library, color: Color.fromRGBO(38, 36, 99, 1.0)),
-            title: Text('Nossas Lojas', style: TextStyle(fontSize: 16)),
+            leading: Icon(Icons.info, color: Color.fromRGBO(2, 30, 105, 1.0)),
+            title: Text('Sobre a Schnell', style: TextStyle(fontSize: 16)),
             onTap: () => {},
-          ),
-          ListTile(
-            leading: Icon(Icons.phone, color: Color.fromRGBO(38, 36, 99, 1.0)),
-            title: Text('Contato', style: TextStyle(fontSize: 16)),
-            onTap: () => {},
-          ),
+          )
         ],
       ),
     );

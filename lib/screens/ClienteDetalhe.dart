@@ -13,6 +13,10 @@ import 'package:url_launcher/url_launcher.dart';
 class ClienteDetalhe extends StatefulWidget {
   @override
   _ClienteDetalheState createState() => _ClienteDetalheState();
+  String nomeCliente;
+  String fone;
+
+  ClienteDetalhe({@required this.nomeCliente, @required this.fone});
 }
 
 class _ClienteDetalheState extends State<ClienteDetalhe> {
@@ -27,7 +31,9 @@ class _ClienteDetalheState extends State<ClienteDetalhe> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
+        backgroundColor: Color.fromRGBO(2, 30, 105, 1.0),
+        body:
+            /*Stack(
       children: <Widget>[
         FutureBuilder(
           future: _getClienteDetalhes(),
@@ -45,7 +51,55 @@ class _ClienteDetalheState extends State<ClienteDetalhe> {
           },
         ),
       ],
-    ));
+    )*/
+            Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(
+                  top: 60.0, left: 30.0, right: 30.0, bottom: 30.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    widget.nomeCliente,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25.0,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+                child: Container(
+              padding: EdgeInsets.fromLTRB(0, 6, 0, 0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20.0),
+                  topRight: Radius.circular(20.0),
+                ),
+              ),
+              child: FutureBuilder(
+                future: _getClienteDetalhes(),
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.waiting:
+                      return Loading();
+                      break;
+                    default:
+                      if (snapshot.hasError)
+                        return Container();
+                      else
+                        return _createGradeTable(context, snapshot);
+                  }
+                },
+              ),
+            ))
+          ],
+        ));
   }
 
   Widget _createGradeTable(BuildContext context, AsyncSnapshot snapshot) {
@@ -98,7 +152,9 @@ class _ClienteDetalheState extends State<ClienteDetalhe> {
                                     child: Text(
                                       "Mestre Caseiro Restaurante e Marmitex",
                                       maxLines: 3,
-                                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600),
                                     ),
                                   ),
                                 ),
@@ -109,7 +165,9 @@ class _ClienteDetalheState extends State<ClienteDetalhe> {
                                     child: Text(
                                       "Francisco Beltrão - PR",
                                       maxLines: 2,
-                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w600),
                                     ),
                                   ),
                                 ),
@@ -118,28 +176,35 @@ class _ClienteDetalheState extends State<ClienteDetalhe> {
                                   child: Container(
                                     height: 30.0,
                                     child: RaisedButton(
-                                      onPressed: (){
+                                      onPressed: () {
                                         fazerLigacao("(46) 98805-7882");
                                       },
                                       shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(80.0)),
+                                          borderRadius:
+                                              BorderRadius.circular(80.0)),
                                       padding: EdgeInsets.all(0.0),
                                       child: Ink(
                                         decoration: BoxDecoration(
                                             gradient: LinearGradient(
-                                              colors: [Color(0xff374ABE), Color(0xff64B6FF)],
+                                              colors: [
+                                                Color(0xff374ABE),
+                                                Color(0xff64B6FF)
+                                              ],
                                               begin: Alignment.centerLeft,
                                               end: Alignment.centerRight,
                                             ),
-                                            borderRadius: BorderRadius.circular(30.0)),
+                                            borderRadius:
+                                                BorderRadius.circular(30.0)),
                                         child: Container(
-                                          constraints:
-                                          BoxConstraints(maxWidth: 100.0, minHeight: 50.0),
+                                          constraints: BoxConstraints(
+                                              maxWidth: 100.0, minHeight: 50.0),
                                           alignment: Alignment.center,
                                           child: Text(
                                             "Ligar",
                                             textAlign: TextAlign.center,
-                                            style: TextStyle(color: Colors.white, fontSize: 15),
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15),
                                           ),
                                         ),
                                       ),
@@ -150,7 +215,7 @@ class _ClienteDetalheState extends State<ClienteDetalhe> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                                                            SocialMediaButton.instagram(
+                                      SocialMediaButton.instagram(
                                         url: null,
                                         color: Colors.pinkAccent,
                                       ),
@@ -172,7 +237,7 @@ class _ClienteDetalheState extends State<ClienteDetalhe> {
             Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(20,20,0,20),
+                  padding: EdgeInsets.fromLTRB(20, 20, 0, 20),
                   child: Text(
                     "Dica Schnell",
                     style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
@@ -206,30 +271,30 @@ class _ClienteDetalheState extends State<ClienteDetalhe> {
                                   child: Row(
                                     children: [
                                       Icon(Icons.local_library),
-                                     Expanded(
-                                       child:  Container(
-                                         height: 80,
-                                         child: Column(
-                                           children: [
-                                             Text(
-                                               "Avenida Júlio Assis Cavalheiro, 2005",
-                                               maxLines: 3,
-                                               style: TextStyle(fontSize: 13),
-                                             ),
-                                             Text(
-                                               "Bairro Industrial - 85601-274",
-                                               maxLines: 3,
-                                               style: TextStyle(fontSize: 13),
-                                             ),
-                                             Text(
-                                               "Francisco Beltrão - PR",
-                                               maxLines: 3,
-                                               style: TextStyle(fontSize: 14),
-                                             )
-                                           ],
-                                         ),
-                                       ),
-                                     )
+                                      Expanded(
+                                        child: Container(
+                                          height: 80,
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                "Avenida Júlio Assis Cavalheiro, 2005",
+                                                maxLines: 3,
+                                                style: TextStyle(fontSize: 13),
+                                              ),
+                                              Text(
+                                                "Bairro Industrial - 85601-274",
+                                                maxLines: 3,
+                                                style: TextStyle(fontSize: 13),
+                                              ),
+                                              Text(
+                                                "Francisco Beltrão - PR",
+                                                maxLines: 3,
+                                                style: TextStyle(fontSize: 14),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ),
@@ -272,7 +337,7 @@ class _ClienteDetalheState extends State<ClienteDetalhe> {
   }
 
   fazerLigacao(String telefone) async {
-    var url = "tel:"+telefone;
+    var url = "tel:" + telefone;
     if (await canLaunch(url)) {
       await launch(url);
     } else {
