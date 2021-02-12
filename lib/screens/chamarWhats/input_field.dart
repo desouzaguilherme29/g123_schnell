@@ -46,7 +46,7 @@ class InputField extends StatelessWidget {
                 fontWeight: FontWeight.w400,
                 fontSize: 20,
                 letterSpacing: 0.9,
-                fontFamily: "Tahoma"),
+                fontFamily: "LatoLightItalic"),
             contentPadding:
                 EdgeInsets.only(top: 30, right: 30, bottom: 30, left: 5)),
       ),

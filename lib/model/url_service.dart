@@ -44,3 +44,24 @@ getURLDetalhesCliente(String telefone) {
   url = getUrlServer() + "getdetalhescliente.php?telefone=" + telefone;
   return url;
 }
+
+getURLCidades() {
+  String url = "";
+  url = getUrlServer() + "cidades.php";
+  return url;
+}
+
+getURLFonesUteis({@required String filtro}) {
+  if (filtro == "") filtro = "false";
+  String url = "";
+  url = getUrlServer() + "getfonesuteis.php?filtro=" + filtro;
+  return url;
+}
+
+getURLResultadoPesquisa({@required String filtro}){
+  if (filtro == "") filtro = "false";
+  String url = "";
+  url = getUrlServer() + "getresultadopesquisa.php?filtro=" + filtro;
+  print(url);
+  return url;
+}

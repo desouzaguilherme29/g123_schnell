@@ -5,6 +5,7 @@ import 'package:g123_schnell/screens/Ramos.dart';
 import 'package:g123_schnell/screens/destaques/Destaques.dart';
 import 'package:g123_schnell/screens/Favoritos.dart';
 import 'package:g123_schnell/screens/RightMenu.dart';
+import 'package:g123_schnell/screens/fonesUteis.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -85,7 +86,7 @@ class _HomePageState extends State<HomePage>
                 Icons.dashboard,
                 color: Colors.red,
               ),
-              title: Text("Início")),
+              title: Text("Início", style: TextStyle(fontFamily: "LatoBlackItalic"))),
           BubbleBottomBarItem(
               backgroundColor: Colors.deepPurple,
               icon: Icon(
@@ -96,7 +97,7 @@ class _HomePageState extends State<HomePage>
                 Icons.format_list_bulleted,
                 color: Colors.deepPurple,
               ),
-              title: Text("Ramos")),
+              title: Text("Ramos", style: TextStyle(fontFamily: "LatoBlackItalic"))),
           BubbleBottomBarItem(
               backgroundColor: Colors.indigo,
               icon: Icon(
@@ -107,7 +108,7 @@ class _HomePageState extends State<HomePage>
                 Icons.local_hospital,
                 color: Colors.indigo,
               ),
-              title: Text("Úteis")),
+              title: Text("Úteis", style: TextStyle(fontFamily: "LatoBlackItalic"))),
           BubbleBottomBarItem(
               backgroundColor: Colors.green,
               icon: Icon(
@@ -118,7 +119,7 @@ class _HomePageState extends State<HomePage>
                 Icons.menu,
                 color: Colors.green,
               ),
-              title: Text("Menu"))
+              title: Text("Menu", style: TextStyle(fontFamily: "LatoBlackItalic"),))
         ],
       ),
     );

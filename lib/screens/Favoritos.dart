@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_login/flutter_login.dart';
-import 'package:g123_schnell/screens/HomePage.dart';
 import 'package:g123_schnell/screens/destaques/PesquisaContato.dart';
 import 'package:g123_schnell/screens/destaques/form_gridview_add_recentementes.dart';
 import 'package:g123_schnell/screens/destaques/form_gridview_patrocinados_recente.dart';
 
-class TelefonesUteis extends StatelessWidget {
+class Favoritos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

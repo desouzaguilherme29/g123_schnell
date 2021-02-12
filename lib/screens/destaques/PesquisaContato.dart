@@ -20,7 +20,7 @@ class _PesquisaContatoState extends State<PesquisaContato> {
               readOnly: true,
               decoration: InputDecoration(
                   hintText: "Pesquisar...",
-                  hintStyle: TextStyle(color: Colors.black),
+                  hintStyle: TextStyle(color: Colors.black, fontFamily: "LatoBlackItalic"),
                   suffixIcon: Icon(Icons.search,color: Colors.black,),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(15.0)))),

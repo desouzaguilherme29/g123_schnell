@@ -1,6 +1,6 @@
-import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:g123_schnell/FuncoesGerais/funcoesGerais.dart';
 import 'package:g123_schnell/model/url_service.dart';
 import 'package:g123_schnell/templates/loading.dart';
 import 'package:http/http.dart' as http;
@@ -24,7 +24,7 @@ class _ClienteDetalheState extends State<ClienteDetalhe> {
   Future _getClienteDetalhes() async {
     http.Response response;
 
-    response = await http.get(getURLDetalhesCliente("11976640765"));
+    response = await http.get(getURLDetalhesCliente(widget.fone));
 
     return json.decode(response.body);
   }
@@ -32,43 +32,35 @@ class _ClienteDetalheState extends State<ClienteDetalhe> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color.fromRGBO(2, 30, 105, 1.0),
-        body:
-            /*Stack(
-      children: <Widget>[
-        FutureBuilder(
-          future: _getClienteDetalhes(),
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.waiting:
-                return Loading();
-                break;
-              default:
-                if (snapshot.hasError)
-                  return Container();
-                else
-                  return _createGradeTable(context, snapshot);
-            }
-          },
-        ),
-      ],
-    )*/
-            Column(
+        body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
               padding: EdgeInsets.only(
-                  top: 60.0, left: 30.0, right: 30.0, bottom: 30.0),
+                  top: 45.0, left: 30.0, right: 30.0, bottom: 30.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    widget.nomeCliente,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25.0,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
+                  Stack(
+                    children: [
+                      GestureDetector(
+                        child: Icon(Icons.arrow_back_ios, size: 25, color: Colors.white,),
+                        onTap: (){
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      Padding(padding: EdgeInsets.only(left: 30),
+                      child:Text(
+                        widget.nomeCliente,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      )
+                    ],
+                  )
                 ],
               ),
             ),
@@ -108,21 +100,72 @@ class _ClienteDetalheState extends State<ClienteDetalhe> {
       itemBuilder: (context, index) {
         return Column(
           children: [
+            Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(20, 5, 0, 20),
+                  child: Text(
+                    "Dica Schnell",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w800,
+                        fontFamily: "LatoBold"),
+                    textAlign: TextAlign.left,
+                  ),
+                )
+              ],
+            ),
+            Divider(),
+            Padding(
+                padding: EdgeInsets.fromLTRB(20, 5, 5, 5),
+                child: Container(
+                  decoration: BoxDecoration(),
+                  child: Text(
+                    snapshot.data[index]["complemento"]
+                        .toString()
+                        .replaceAll("<br>", "\n")
+                        .replaceAll("<b>", "")
+                        .replaceAll("</b>", "\n")
+                        .replaceAll("<font color=green>", "")
+                        .replaceAll("</font>", ""),
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: "LatoBold",
+                        color: Colors.black),
+                  ),
+                )),
             Container(
                 padding: EdgeInsets.fromLTRB(15, 20, 0, 0),
-                height: 200,
+                height: 230,
                 child: Row(
                   //Stretches to vertically fill its parent container
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     Container(
-                        height: 200,
+                        height: 250,
                         width: 150,
                         child: Container(
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: NetworkImage(
-                                      "https://g123.com.br/publicidade/17/46988057882/gifs/mestrecaseiro.png"),
+                                  image: FadeInImage(
+                                          height: 80,
+                                          width: 158,
+                                          fit: BoxFit.fill,
+                                          image: snapshot.data[index]["arquivo"]
+                                                      .toString() !=
+                                                  ""
+                                              ? NetworkImage(getUrlFotoPrincipal(
+                                                  snapshot.data[index]["cidade_codigo"]
+                                                      .toString(),
+                                                  snapshot.data[index]["nrofone"]
+                                                      .toString(),
+                                                  snapshot.data[index]["arquivo"]
+                                                      .toString()))
+                                              : AssetImage(
+                                                  'imagens/no-image-icon.png'),
+                                          placeholder: AssetImage(
+                                              'imagens/carrega_produtos.gif'))
+                                      .image,
                                   fit: BoxFit.fill),
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(20),
@@ -147,23 +190,55 @@ class _ClienteDetalheState extends State<ClienteDetalhe> {
                               children: [
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(15, 0, 20, 0),
-                                  child: Container(
-                                    height: 70,
-                                    child: Text(
-                                      "Mestre Caseiro Restaurante e Marmitex",
-                                      maxLines: 3,
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(0),
+                                    child: Container(
+                                      height: 50.0,
+                                      child: RaisedButton(
+                                        onPressed: () {
+                                          fazerLigacao(snapshot.data[index]["nrofone"]);
+                                        },
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(80.0)),
+                                        padding: EdgeInsets.all(0.0),
+                                        child: Ink(
+                                          decoration: BoxDecoration(
+                                              gradient: LinearGradient(
+                                                colors: [
+                                                  Color(0xff374ABE),
+                                                  Color(0xff64B6FF)
+                                                ],
+                                                begin: Alignment.centerLeft,
+                                                end: Alignment.centerRight,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(30.0)),
+                                          child: Container(
+                                            constraints: BoxConstraints(
+                                                maxWidth: 150.0,
+                                                minHeight: 50.0),
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              "Ligar",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 17,
+                                              fontFamily: "LatoBold"),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.all(5),
+                                  padding: EdgeInsets.only(top: 25),
                                   child: Container(
                                     height: 30,
                                     child: Text(
-                                      "Francisco Beltrão - PR",
+                                      snapshot.data[index]["cidade"] + "-" +snapshot.data[index]["uf"],
                                       maxLines: 2,
                                       style: TextStyle(
                                           fontSize: 15,
@@ -171,62 +246,38 @@ class _ClienteDetalheState extends State<ClienteDetalhe> {
                                     ),
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.all(0),
-                                  child: Container(
-                                    height: 30.0,
-                                    child: RaisedButton(
-                                      onPressed: () {
-                                        fazerLigacao("(46) 98805-7882");
-                                      },
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(80.0)),
-                                      padding: EdgeInsets.all(0.0),
-                                      child: Ink(
-                                        decoration: BoxDecoration(
-                                            gradient: LinearGradient(
-                                              colors: [
-                                                Color(0xff374ABE),
-                                                Color(0xff64B6FF)
-                                              ],
-                                              begin: Alignment.centerLeft,
-                                              end: Alignment.centerRight,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(30.0)),
-                                        child: Container(
-                                          constraints: BoxConstraints(
-                                              maxWidth: 100.0, minHeight: 50.0),
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            "Ligar",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                Center(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      snapshot.data[index]["fone_whats"] != "" ? SocialMediaButton.whatsapp(
+                                        size: 35,
+                                        url: snapshot.data[index]["fone_whats"],
+                                        color: Colors.green,
+                                      ) : Container(),
+                                      snapshot.data[index]["instagram"] != "" ? SocialMediaButton.instagram(
+                                        size: 35,
+                                        url: "https://" + snapshot.data[index]["instagram"],
+                                        color: Colors.pinkAccent,
+                                      ) : Container(),
+
+                                    ],
                                   ),
                                 ),
                                 Center(
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SocialMediaButton.instagram(
-                                        url: null,
-                                        color: Colors.pinkAccent,
-                                      ),
-                                      SocialMediaButton.facebook(
-                                        url: null,
-                                        color: Colors.blue,
-                                      ),
-                                      SocialMediaButton.whatsapp(
-                                        url: null,
-                                        color: Colors.green,
-                                      )
+                                      snapshot.data[index]["face"].toString() != "" ? SocialMediaButton.facebook(
+                                        size: 35,
+                                        url: "https://" + snapshot.data[index]["face"].toString(),
+                                        color: Colors.blueAccent,
+                                      ) : Container(),
+                                      snapshot.data[index]["twitter"].toString() != "" ? SocialMediaButton.twitter(
+                                        size: 35,
+                                        url: "https://" + snapshot.data[index]["twitter"].toString(),
+                                        color: Colors.lightBlueAccent,
+                                      ) : Container(),
                                     ],
                                   ),
                                 )
@@ -234,25 +285,6 @@ class _ClienteDetalheState extends State<ClienteDetalhe> {
                             ))),
                   ],
                 )),
-            Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(20, 20, 0, 20),
-                  child: Text(
-                    "Dica Schnell",
-                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-                    textAlign: TextAlign.left,
-                  ),
-                )
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-              child: Text(
-                "Mestre Caseiro Restaurante e Marmitex oferece: Marmitex; Buffet por kg e livre; Entregas de marmitas. De segunda-feira a sexta-feira das 11:00 às 13:00. Em frente à UNIPAR!",
-                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13),
-              ),
-            ),
             Container(
                 padding: EdgeInsets.fromLTRB(15, 20, 0, 0),
                 height: 200,
@@ -334,14 +366,5 @@ class _ClienteDetalheState extends State<ClienteDetalhe> {
         );
       },
     );
-  }
-
-  fazerLigacao(String telefone) async {
-    var url = "tel:" + telefone;
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 }

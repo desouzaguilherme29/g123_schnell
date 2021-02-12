@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:g123_schnell/FuncoesGerais/funcoesGerais.dart';
 import 'package:g123_schnell/model/url_service.dart';
-import 'package:g123_schnell/screens/destaques/ResultadoPesquisa.dart';
 import 'package:g123_schnell/templates/loading.dart';
 import 'package:g123_schnell/templates/pesquise_vazia.dart';
 import 'package:g123_schnell/templates/template_error.dart';
@@ -9,30 +9,14 @@ import 'dart:convert';
 import 'package:side_header_list_view/side_header_list_view.dart'
     show SideHeaderListView;
 
-class Ramos extends StatefulWidget {
+class TelefonesUteis extends StatefulWidget {
   @override
-  _RamosState createState() => _RamosState();
+  _TelefonesUteisState createState() => _TelefonesUteisState();
 }
 
-class _RamosState extends State<Ramos> {
+class _TelefonesUteisState extends State<TelefonesUteis> {
   TextEditingController _controllerPesquisa = new TextEditingController();
   var list;
-
-  Future _getRamos() async {
-    http.Response response;
-
-    try {
-      if (_controllerPesquisa.text == null || _controllerPesquisa.text.isEmpty)
-        response = await http.get(getURLListaRamos(filtro: ""));
-      else
-        response =
-            await http.get(getURLListaRamos(filtro: _controllerPesquisa.text));
-
-      return json.decode(response.body);
-    } on Exception catch (_) {
-      print(Exception);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +32,7 @@ class _RamosState extends State<Ramos> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'Ramos de atividade',
+                  'Telefones úteis',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 25.0,
@@ -86,7 +70,9 @@ class _RamosState extends State<Ramos> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(15.0)))),
                           onSubmitted: (pesquisa) {
-                            setState(() {});
+                            setState(() {
+
+                            });
                           },
                           onChanged: (pesquisa) {
                             if (pesquisa.isEmpty || pesquisa == "")
@@ -96,7 +82,7 @@ class _RamosState extends State<Ramos> {
                       )),
                   Expanded(
                     child: FutureBuilder(
-                      future: _getRamos(),
+                      future: _getFonesUteis(),
                       // ignore: missing_return
                       builder: (context, snapshot) {
                         switch (snapshot.connectionState) {
@@ -121,6 +107,22 @@ class _RamosState extends State<Ramos> {
     );
   }
 
+  Future _getFonesUteis() async {
+    http.Response response;
+
+    try {
+      if (_controllerPesquisa.text == null || _controllerPesquisa.text.isEmpty)
+        response = await http.get(getURLFonesUteis(filtro: ""));
+      else
+        response =
+            await http.get(getURLFonesUteis(filtro: _controllerPesquisa.text));
+
+      return json.decode(response.body);
+    } on Exception catch (_) {
+      print(Exception);
+    }
+  }
+
   Widget _carregaGrupos(BuildContext context, AsyncSnapshot snapshot) {
     return snapshot.data.length > 0
         ? SideHeaderListView(
@@ -130,13 +132,11 @@ class _RamosState extends State<Ramos> {
             headerBuilder: (BuildContext context, int index) {
               return new SizedBox(
                   width: 32.0,
-                  child: new Text(
-                      snapshot.data[index]["descricao"].substring(0, 1),
+                  child: new Text(snapshot.data[index]["nome"].substring(0, 1),
                       style: TextStyle(
                           color: Colors.blue,
                           fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "LatoBlackItalic")));
+                          fontWeight: FontWeight.bold)));
             },
             itemBuilder: (BuildContext context, int index) {
               return new Container(
@@ -148,10 +148,7 @@ class _RamosState extends State<Ramos> {
                   ),
                   child: GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => ResultadoPesquisa()));
+                        fazerLigacao(snapshot.data[index]["nrofone"]);
                       },
                       child: Row(
                         children: <Widget>[
@@ -165,18 +162,15 @@ class _RamosState extends State<Ramos> {
                           Padding(
                             padding: EdgeInsets.all(10),
                             child: Text(
-                              snapshot.data[index]["descricao"]
-                                  .toString()
-                                  .substring(
-                                      0,
-                                      (snapshot.data[index]["descricao"]
-                                                      .toString())
-                                                  .length >
-                                              50
-                                          ? 50
-                                          : (snapshot.data[index]["descricao"]
-                                                  .toString())
-                                              .length),
+                              snapshot.data[index]["nome"].toString().substring(
+                                  0,
+                                  (snapshot.data[index]["nome"].toString())
+                                              .length >
+                                          50
+                                      ? 50
+                                      : (snapshot.data[index]["nome"]
+                                              .toString())
+                                          .length),
                               style: TextStyle(
                                   fontSize: 14, fontFamily: "LatoBlackItalic"),
                             ),
@@ -185,8 +179,8 @@ class _RamosState extends State<Ramos> {
                       )));
             },
             hasSameHeader: (int a, int b) {
-              return snapshot.data[a]["descricao"].substring(0, 1) ==
-                  snapshot.data[b]["descricao"].substring(0, 1);
+              return snapshot.data[a]["nome"].substring(0, 1) ==
+                  snapshot.data[b]["nome"].substring(0, 1);
             },
           )
         : PesquisaVazia();

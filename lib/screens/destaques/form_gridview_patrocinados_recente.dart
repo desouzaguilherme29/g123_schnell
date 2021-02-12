@@ -40,7 +40,7 @@ class _FormViewPatrocinadosRecentementeState
               return Stack(
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.all(5),
+                  margin: EdgeInsets.all(5),
                     height: 285,
                   ),
                   Column(
@@ -54,7 +54,7 @@ class _FormViewPatrocinadosRecentementeState
                             child: Text(
                               "Patrocindados recentemente",
                               style: TextStyle(
-                                  fontSize: 21, fontWeight: FontWeight.w700),
+                                  fontSize: 21, fontWeight: FontWeight.w700, fontFamily: "LatoBlackItalic"),
                             ),
                           ),
                         ),
@@ -130,6 +130,7 @@ class _FormViewPatrocinadosRecentementeState
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold,
+                                                                fontFamily: "LatoBlackItalic"
                                                             ),
                                                             maxLines: 3,
                                                             textAlign: TextAlign
@@ -151,6 +152,7 @@ class _FormViewPatrocinadosRecentementeState
                                                     .primaryColor,
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.bold,
+                                                  fontFamily: "LatoBlackItalic"
                                               ),
                                               maxLines: 1,
                                             ),
@@ -169,6 +171,7 @@ class _FormViewPatrocinadosRecentementeState
                                                     .primaryColor,
                                                 fontSize: 13.0,
                                                 fontWeight: FontWeight.w600,
+                                                  fontFamily: "LatoBlackItalic"
                                               ),
                                               maxLines: 1,
                                             ),
@@ -183,6 +186,7 @@ class _FormViewPatrocinadosRecentementeState
                                                     .primaryColor,
                                                 fontSize: 13.0,
                                                 fontWeight: FontWeight.w600,
+                                                  fontFamily: "LatoBlackItalic"
                                               ),
                                               maxLines: 1,
                                             ),

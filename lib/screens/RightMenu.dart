@@ -12,7 +12,7 @@ class Menu extends StatelessWidget {
               'Menu',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 20,
+                fontSize: 20, fontFamily: "LatoLightItalic"
               ),
             ),
             decoration: BoxDecoration(
@@ -24,17 +24,17 @@ class Menu extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.add_box, color: Color.fromRGBO(2, 30, 105, 1.0),),
-            title: Text('Incluir telefone', style: TextStyle(fontSize: 16)),
+            title: Text('Incluir telefone', style: TextStyle(fontSize: 18, fontFamily: "LatoMedium")),
             onTap: () => {},
           ),
           ListTile(
             leading: Icon(Icons.location_on, color: Color.fromRGBO(2, 30, 105, 1.0)),
-            title: Text('Buscar CEP', style: TextStyle(fontSize: 16)),
+            title: Text('Buscar CEP', style: TextStyle(fontSize: 18, fontFamily: "LatoMedium")),
             onTap: () => {},
           ),
           ListTile(
             leading: Icon(Icons.info, color: Color.fromRGBO(2, 30, 105, 1.0)),
-            title: Text('Sobre a Schnell', style: TextStyle(fontSize: 16)),
+             title: Text('Sobre a Schnell', style: TextStyle(fontSize: 18, fontFamily: "LatoMedium")),
             onTap: () => {},
           )
         ],

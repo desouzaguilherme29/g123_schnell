@@ -13,19 +13,18 @@ class _PesquisaVaziaState extends State<PesquisaVazia> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              height: 100,
-              child: Column(
-                children: [
-                  //Image.asset("imagens/telefone_carregando.gif",height: 80,),
-                  Text("Use a caixa de pesquisa acima para pesquisar...")
-                ],
-              ),
+          children: [
+            Image(
+              image: AssetImage('imagens/semresultados.png'),
+              height: 150,
+            ),
+            Text(
+              "Não há resultados.",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, fontFamily: "LatoLightItalic"),
             ),
           ],
         ),
-      ),
+      )
     );
   }
 }

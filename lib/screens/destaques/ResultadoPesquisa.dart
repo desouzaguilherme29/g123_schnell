@@ -17,11 +17,11 @@ class _ResultadoPesquisaState extends State<ResultadoPesquisa> {
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   TextEditingController _textEditingController = TextEditingController();
 
-  Future _getProdutos() async {
+  Future _getResultadoPesquisa() async {
     http.Response response;
 
     if (_textEditingController.text != "")
-      response = await http.get(getURLPatrocinadosRecentes(filtro: _textEditingController.text));
+      response = await http.get(getURLResultadoPesquisa(filtro: _textEditingController.text));
 
     return json.decode(response.body);
   }
@@ -33,7 +33,7 @@ class _ResultadoPesquisaState extends State<ResultadoPesquisa> {
             key: _scaffoldkey,
             backgroundColor: Colors.white,
             appBar: AppBar(
-              title: Text("Resultado da Pesquisa"),
+              title: Text("Resultado da Pesquisa", style: TextStyle(fontFamily: "LatoBold"),),
               centerTitle: true,
               bottom: TabBar(
                 indicatorColor: Colors.white,
@@ -49,6 +49,7 @@ class _ResultadoPesquisaState extends State<ResultadoPesquisa> {
             ),
             body: Column(
               children: [
+
                 Padding(
                   padding: EdgeInsets.all(5),
                   child: TextField(
@@ -57,6 +58,7 @@ class _ResultadoPesquisaState extends State<ResultadoPesquisa> {
                     style: TextStyle(fontSize: 15),
                     decoration: InputDecoration(
                         hintText: "Pesquise aqui seu contato...",
+                        hintStyle: TextStyle(fontFamily: "LatoBlack"),
                         suffixIcon: Icon(Icons.search),
                         border: OutlineInputBorder(
                             borderRadius:
@@ -66,14 +68,14 @@ class _ResultadoPesquisaState extends State<ResultadoPesquisa> {
                         setState(() {});
                       else
                         _scaffoldkey.currentState.showSnackBar(SnackBar(
-                          content: Text('Campo pesquisa está vazio!'),
+                          content: Text('Campo pesquisa está vazio!', style: TextStyle(fontFamily: "LatoBlack", fontSize: 16), textAlign: TextAlign.center,),
                         ));
                     },
                   ),
                 ),
                 Expanded(
                   child: FutureBuilder(
-                    future: _getProdutos(),
+                    future: _getResultadoPesquisa(),
                     // ignore: missing_return
                     builder: (context, snapshot) {
                       switch (snapshot.connectionState) {
@@ -115,21 +117,13 @@ class _ResultadoPesquisaState extends State<ResultadoPesquisa> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    ClienteDetalhe()));
-                      },
-                      child: FadeInImage(
-                          height: 80,
-                          width: 120,
-                          image: AssetImage(
-                              'imagens/semtelefone.png'),
-                          placeholder: AssetImage(
-                              'imagens/carrega_produtos.gif')),
-                    ),
+                    FadeInImage(
+                        height: 80,
+                        width: 120,
+                        image: AssetImage(
+                            'imagens/semtelefone.png'),
+                        placeholder: AssetImage(
+                            'imagens/carrega_produtos.gif')),
                     Expanded(
                       child: Container(
                         padding: EdgeInsets.all(5.0),

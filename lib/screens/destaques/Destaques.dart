@@ -15,59 +15,58 @@ class _DestaquesState extends State<Destaques> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverAppBar(
-                shape: ContinuousRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(30),
-                        bottomRight: Radius.circular(30))),
-                expandedHeight: 250.0,
-                pinned: true,
-                flexibleSpace: FlexibleSpaceBar(
-                    titlePadding: EdgeInsets.fromLTRB(5, 0, 0, 20),
-                    collapseMode: CollapseMode.pin,
-                    centerTitle: false,
-                    background: _StoryView(),
-                    title: Container(
-                      decoration: BoxDecoration(
-                        borderRadius:  BorderRadius.only(
-                            topRight: Radius.circular(30),
-                            bottomRight: Radius.circular(30)),
-                        color: Color.fromRGBO(2, 30, 105, 0.8),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(3),
-                        child: Text(
-                          "Bem Vindo, Guilherme Antonio",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 13.0,
-                          ),
-                          textAlign: TextAlign.left,
-                        ),
-                      ),
-                    )),
-              ),
-            ];
-          },
-          body: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              PesquisaContato(),
-              FormViewPatrocinadosRecentemente(),
-              FormViewAddRecentemente()
-            ],
+      backgroundColor: Color.fromRGBO(2, 30, 105, 1.0),
+      body:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.only(
+                top: 60.0, left: 30.0, right: 30.0, bottom: 30.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Bem vindo, Guilherme Antonio',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25.0,
+                    fontWeight: FontWeight.w700,
+                      fontFamily: "LatoBlackItalic"
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.fromLTRB(0,6,0,0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20.0),
+                  topRight: Radius.circular(20.0),
+                ),
+              ),
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: <Widget>[
+                  PesquisaContato(),
+                  _StoryView(),
 
+                  FormViewPatrocinadosRecentemente(),
+                  FormViewAddRecentemente()
+                ],
+              )
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _StoryView() {
     return Padding(
-      padding: EdgeInsets.fromLTRB(0,24,0,0),
+      padding: EdgeInsets.fromLTRB(0,0,0,0),
       child: StoryViewer(
         padding: EdgeInsets.all(8),
         backgroundColor: Colors.white,
