@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:g123_schnell/model/cidades.dart';
 import 'package:g123_schnell/model/url_service.dart';
 import 'package:g123_schnell/screens/ClienteDetalhe.dart';
 import 'package:g123_schnell/templates/loading.dart';
@@ -6,6 +9,7 @@ import 'package:g123_schnell/templates/pesquise_vazia.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
+import 'package:filter_list/filter_list.dart';
 
 class ResultadoPesquisa extends StatefulWidget {
   @override
@@ -17,13 +21,62 @@ class _ResultadoPesquisaState extends State<ResultadoPesquisa> {
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   TextEditingController _textEditingController = TextEditingController();
 
+  List<String> countList = [];
+  List<String> selectedCountList = [];
+
+  Future _getCidades() async {
+    http.Response response;
+
+    response = await http.get(getURLCidades());
+
+    var tagObjsJson = jsonDecode(response.body)['cidades'] as List;
+    List<Cidade> cidades =
+        tagObjsJson.map((tagJson) => Cidade.fromJson(tagJson)).toList();
+
+    setState(() {
+      countList = [
+        for(int i = 0; i < cidades.length; i++) cidades[i].toString()
+      ];
+
+    });
+  }
+
+  void _openFilterDialog() async {
+    await FilterListDialog.display(context,
+        allTextList: countList,
+        height: 480,
+        borderRadius: 20,
+        headlineText: "Selecione",
+        selectedTextBackgroundColor: Color.fromRGBO(2, 30, 105, 1.0),
+        searchFieldHintText: "Pesquisar",
+        allResetButonColor: Color.fromRGBO(2, 30, 105, 1.0),
+        applyButonTextBackgroundColor: Color.fromRGBO(2, 30, 105, 1.0),
+        hideSelectedTextCount: true,
+        selectedTextList: selectedCountList, onApplyButtonClick: (list) {
+      if (list != null) {
+        setState(() {
+          selectedCountList = List.from(list);
+        });
+        Navigator.pop(context);
+      }
+    });
+  }
+
   Future _getResultadoPesquisa() async {
     http.Response response;
 
     if (_textEditingController.text != "")
-      response = await http.get(getURLResultadoPesquisa(filtro: _textEditingController.text));
+      response = await http
+          .get(getURLResultadoPesquisa(filtro: _textEditingController.text));
 
     return json.decode(response.body);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _getCidades();
   }
 
   Widget build(BuildContext context) {
@@ -33,7 +86,10 @@ class _ResultadoPesquisaState extends State<ResultadoPesquisa> {
             key: _scaffoldkey,
             backgroundColor: Colors.white,
             appBar: AppBar(
-              title: Text("Resultado da Pesquisa", style: TextStyle(fontFamily: "LatoBold"),),
+              title: Text(
+                "Resultado da Pesquisa",
+                style: TextStyle(fontFamily: "LatoBold"),
+              ),
               centerTitle: true,
               bottom: TabBar(
                 indicatorColor: Colors.white,
@@ -49,11 +105,37 @@ class _ResultadoPesquisaState extends State<ResultadoPesquisa> {
             ),
             body: Column(
               children: [
-
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: _openFilterDialog,
+                      child: Container(
+                        margin: EdgeInsets.all(4),
+                        width: MediaQuery.of(context).size.width * 0.98,
+                        height: 60,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Color.fromRGBO(2, 30, 105, 1.0),
+                            border: Border.all(color: Colors.white, width: 1.5),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15.0))),
+                        child: Text(
+                          "Cidades",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: 0.3,
+                              fontFamily: "LatoBold"),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
                 Padding(
                   padding: EdgeInsets.all(5),
                   child: TextField(
-                    autofocus: true,
                     controller: _textEditingController,
                     style: TextStyle(fontSize: 15),
                     decoration: InputDecoration(
@@ -68,7 +150,12 @@ class _ResultadoPesquisaState extends State<ResultadoPesquisa> {
                         setState(() {});
                       else
                         _scaffoldkey.currentState.showSnackBar(SnackBar(
-                          content: Text('Campo pesquisa está vazio!', style: TextStyle(fontFamily: "LatoBlack", fontSize: 16), textAlign: TextAlign.center,),
+                          content: Text(
+                            'Campo pesquisa está vazio!',
+                            style: TextStyle(
+                                fontFamily: "LatoBlack", fontSize: 16),
+                            textAlign: TextAlign.center,
+                          ),
                         ));
                     },
                   ),
@@ -120,34 +207,27 @@ class _ResultadoPesquisaState extends State<ResultadoPesquisa> {
                     FadeInImage(
                         height: 80,
                         width: 120,
-                        image: AssetImage(
-                            'imagens/semtelefone.png'),
-                        placeholder: AssetImage(
-                            'imagens/carrega_produtos.gif')),
+                        image: AssetImage('imagens/semtelefone.png'),
+                        placeholder:
+                            AssetImage('imagens/carrega_produtos.gif')),
                     Expanded(
                       child: Container(
                         padding: EdgeInsets.all(5.0),
                         child: Column(
                           children: <Widget>[
                             Padding(
-                              padding:
-                              EdgeInsets.only(bottom: 6),
+                              padding: EdgeInsets.only(bottom: 6),
                               child: Center(
                                   child: Text(
-                                      snapshot.data[index]
-                                      ["nomedono"]
+                                      snapshot.data[index]["nomedono"]
                                           .toString(),
                                       style: TextStyle(
-                                        color:
-                                        Theme.of(context)
-                                            .primaryColor,
+                                        color: Theme.of(context).primaryColor,
                                         fontSize: 17.0,
-                                        fontWeight:
-                                        FontWeight.bold,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                       maxLines: 3,
-                                      textAlign:
-                                      TextAlign.center)),
+                                      textAlign: TextAlign.center)),
                             )
                           ],
                         ),
@@ -156,11 +236,9 @@ class _ResultadoPesquisaState extends State<ResultadoPesquisa> {
                     Padding(
                       padding: EdgeInsets.only(bottom: 10),
                       child: Text(
-                        snapshot.data[index]["nrofone_formatado"]
-                            .toString(),
+                        snapshot.data[index]["nrofone_formatado"].toString(),
                         style: TextStyle(
-                          color:
-                          Theme.of(context).primaryColor,
+                          color: Theme.of(context).primaryColor,
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -170,13 +248,11 @@ class _ResultadoPesquisaState extends State<ResultadoPesquisa> {
                     Padding(
                       padding: EdgeInsets.only(bottom: 10),
                       child: Text(
-                        snapshot.data[index]["cidade"]
-                            .toString() + "-" + snapshot.data[index]["uf"]
-                            .toString(),
-
+                        snapshot.data[index]["cidade"].toString() +
+                            "-" +
+                            snapshot.data[index]["uf"].toString(),
                         style: TextStyle(
-                          color:
-                          Theme.of(context).primaryColor,
+                          color: Theme.of(context).primaryColor,
                           fontSize: 13.0,
                           fontWeight: FontWeight.w600,
                         ),
@@ -186,12 +262,9 @@ class _ResultadoPesquisaState extends State<ResultadoPesquisa> {
                     Padding(
                       padding: EdgeInsets.only(bottom: 5),
                       child: Text(
-                        snapshot
-                            .data[index]["endereco"]
-                            .toString(),
+                        snapshot.data[index]["endereco"].toString(),
                         style: TextStyle(
-                          color:
-                          Theme.of(context).primaryColor,
+                          color: Theme.of(context).primaryColor,
                           fontSize: 13.0,
                           fontWeight: FontWeight.w600,
                         ),
@@ -214,10 +287,9 @@ class _ResultadoPesquisaState extends State<ResultadoPesquisa> {
                     child: FadeInImage(
                         height: 70,
                         width: 120,
-                        image: AssetImage(
-                            'imagens/semtelefone.png'),
-                        placeholder: AssetImage(
-                            'imagens/carrega_produtos.gif')),
+                        image: AssetImage('imagens/semtelefone.png'),
+                        placeholder:
+                            AssetImage('imagens/carrega_produtos.gif')),
                   ),
                   Flexible(
                     flex: 2,
@@ -229,8 +301,7 @@ class _ResultadoPesquisaState extends State<ResultadoPesquisa> {
                           Text(
                             snapshot.data[index]["nomedono"].toString(),
                             style: TextStyle(
-                                fontSize: 17.0,
-                                fontWeight: FontWeight.bold),
+                                fontSize: 17.0, fontWeight: FontWeight.bold),
                             maxLines: 2,
                           ),
                           Text(

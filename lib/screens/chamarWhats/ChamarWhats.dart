@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:g123_schnell/screens/chamarWhats/input_field.dart';
 import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
 import 'package:g123_schnell/templates/CabPages.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ChamarWhats extends StatefulWidget {
   @override
@@ -14,6 +15,14 @@ class _ChamarWhatsState extends State<ChamarWhats> {
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController controllerNumero = new TextEditingController();
+
+  _launchURL(String urlOpen) async {
+    if (await canLaunch(urlOpen)) {
+      await launch(urlOpen);
+    } else {
+      throw 'Could not launch $urlOpen';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,10 +69,9 @@ class _ChamarWhatsState extends State<ChamarWhats> {
                     child: InkWell(
                       onTap: () {
                         if (formKey.currentState.validate()) {
-                          FlutterOpenWhatsapp.sendSingleMessage(
-                              "+55" + controllerNumero.text, "Olá");
-                        }
-                      },
+                          _launchURL("https://api.whatsapp.com/send?phone=+55"+ controllerNumero.text);
+                      }
+                        },
                       child: Container(
                         width: 320,
                         height: 60,

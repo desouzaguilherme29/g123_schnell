@@ -56,6 +56,8 @@ dependencies:
   motion_tab_bar: ^0.1.5
   bubble_bottom_bar: ^1.2.0
   direct_select_flutter: ^1.0.7
+  filter_list: ^0.0.5
+  search_cep: ^3.0.0+2
 
 dev_dependencies:
   flutter_test:

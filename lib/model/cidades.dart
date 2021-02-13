@@ -1,15 +1,18 @@
 class Cidade {
-  final String codigo;
   final String nome;
 
-  Cidade(this.codigo, this.nome);
+  Cidade(this.nome);
 
-  Cidade.fromJson(Map<String, dynamic> json)
-      : codigo = json['codigo'],
-        nome = json['nome'];
+  factory Cidade.fromJson(dynamic json) {
+    return Cidade(json['nome'] as String);
+  }
 
   Map<String, dynamic> toJson() => {
-        'codigo': codigo,
-        'email': nome,
+        'nome': nome,
       };
+
+  @override
+  String toString() {
+    return '${this.nome}';
+  }
 }

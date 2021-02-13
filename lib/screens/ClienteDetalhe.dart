@@ -29,6 +29,8 @@ class _ClienteDetalheState extends State<ClienteDetalhe> {
     return json.decode(response.body);
   }
 
+
+
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Color.fromRGBO(2, 30, 105, 1.0),
@@ -252,7 +254,7 @@ class _ClienteDetalheState extends State<ClienteDetalhe> {
                                     children: [
                                       snapshot.data[index]["fone_whats"] != "" ? SocialMediaButton.whatsapp(
                                         size: 35,
-                                        url: snapshot.data[index]["fone_whats"],
+                                        url: "https://api.whatsapp.com/send?phone=+55"+snapshot.data[index]["fone_whats"].toString(),
                                         color: Colors.green,
                                       ) : Container(),
                                       snapshot.data[index]["instagram"] != "" ? SocialMediaButton.instagram(

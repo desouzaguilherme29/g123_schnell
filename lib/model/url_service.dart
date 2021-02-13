@@ -11,8 +11,6 @@ getUrlFotoPrincipal(String cidade, String telefone, String arquivo) {
       telefone +
       "/gifs/" +
       arquivo;
-
-  print(imagem);
   return imagem;
 }
 
@@ -48,6 +46,7 @@ getURLDetalhesCliente(String telefone) {
 getURLCidades() {
   String url = "";
   url = getUrlServer() + "cidades.php";
+  print(url);
   return url;
 }
 

@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         const Locale('pt', ''),
       ],
       home: SplashScreenView(
-        home: HomePage(),
+        home: Login(),
         duration: 3000,
         imageSize: 200,
         imageSrc: "imagens/iconesemfundo.png",
