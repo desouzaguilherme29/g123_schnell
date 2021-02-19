@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 getUrlServer() {
-  return "http://192.168.0.101:80/guia/";
+  return "http://192.168.0.102:80/guia/";
 }
 
 getUrlFotoPrincipal(String cidade, String telefone, String arquivo) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:g123_schnell/FuncoesGerais/GlobalStatics.dart';
 import 'package:g123_schnell/screens/destaques/PesquisaContato.dart';
 import 'package:g123_schnell/screens/destaques/form_gridview_add_recentementes.dart';
 import 'package:g123_schnell/screens/destaques/form_gridview_patrocinados_recente.dart';
@@ -26,7 +27,7 @@ class _DestaquesState extends State<Destaques> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'Bem vindo, Guilherme Antonio',
+                  'Bem vindo, ' + GlobalStatics.displayName,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 25.0,

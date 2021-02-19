@@ -3,6 +3,7 @@ import 'package:date_format/date_format.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:g123_schnell/FuncoesGerais/GlobalStatics.dart';
 import 'package:g123_schnell/screens/HomePage.dart';
 
 import 'package:google_sign_in/google_sign_in.dart';
@@ -122,6 +123,10 @@ class _LoginState extends State<Login> {
       }
 
       final user = userCredential.user;
+
+      GlobalStatics.displayName =  user.displayName;
+      GlobalStatics.email =  user.email;
+      GlobalStatics.photoURL =  user.photoURL;
 
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => HomePage()));

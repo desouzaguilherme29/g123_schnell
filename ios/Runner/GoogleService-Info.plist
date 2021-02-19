@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>779812915292-heetk422ol3fbek2shdvqlvunsivue5a.apps.googleusercontent.com</string>
+	<string>369974969046-dmcc0cnu47gtm81kl67o7k93085k77gn.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.779812915292-heetk422ol3fbek2shdvqlvunsivue5a</string>
+	<string>com.googleusercontent.apps.369974969046-dmcc0cnu47gtm81kl67o7k93085k77gn</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>779812915292-h6sshko0n1invh5k31jd5aemdf0uf0rs.apps.googleusercontent.com</string>
+	<string>369974969046-t5ch588o9qbfoiq41qn4vtfao9kqrvep.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAJ0wlyaaQc8XZrMA7z4RHie4d5FF-KJSY</string>
+	<string>AIzaSyDWvaZDmLteF67PzOsFRzbu41VilVorsSk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>779812915292</string>
+	<string>369974969046</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>br.com.desouzaguilherme29.g123Schnell</string>
 	<key>PROJECT_ID</key>
-	<string>guia-schnell-434a6</string>
+	<string>guiaschnell-g123</string>
 	<key>STORAGE_BUCKET</key>
-	<string>guia-schnell-434a6.appspot.com</string>
+	<string>guiaschnell-g123.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:779812915292:ios:3b15153f4edac8a9247e99</string>
+	<string>1:369974969046:ios:0e6955632e09929f833f77</string>
 </dict>
 </plist>

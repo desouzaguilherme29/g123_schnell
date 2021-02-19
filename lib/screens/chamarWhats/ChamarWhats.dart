@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:g123_schnell/screens/chamarWhats/input_field.dart';
-import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
+import 'package:g123_schnell/templates/input_field.dart';
 import 'package:g123_schnell/templates/CabPages.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -59,6 +58,9 @@ class _ChamarWhatsState extends State<ChamarWhats> {
                             controller: controllerNumero,
                             validateText: "Deve conter pelo menos 10 dígitos.",
                             autoFocus: true,
+                            keytype: TextInputType.number,
+                            length: 11,
+                            maxlength: 11,
                           ),
                         ],
                       ),
@@ -80,28 +82,14 @@ class _ChamarWhatsState extends State<ChamarWhats> {
                             color: Color.fromRGBO(69, 199, 99, 1.0),
                             border: Border.all(color: Colors.white, width: 1.5),
                             borderRadius: BorderRadius.all(Radius.circular(30.0))),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                              child: Image.asset("imagens/whatsapp.png"),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(20, 0, 10, 0),
-                                child: Text(
-                                  "Chamar",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 26,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: "LatoBlackItalic",
-                                      letterSpacing: 0.3),
-                                ),
-                              ),
-                            )
-                          ],
+                        child: Text(
+                          "Chamar",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 26,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: "LatoBlackItalic",
+                              letterSpacing: 0.3),
                         ),
                       ),
                     ),

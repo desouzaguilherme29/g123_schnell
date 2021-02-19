@@ -77,25 +77,25 @@ class _HomePageState extends State<HomePage>
 
         items: <BubbleBottomBarItem>[
           BubbleBottomBarItem(
-              backgroundColor: Colors.red,
+              backgroundColor:Colors.indigo,
               icon: Icon(
                 Icons.dashboard,
                 color: Colors.black,
               ),
               activeIcon: Icon(
                 Icons.dashboard,
-                color: Colors.red,
+                color: Colors.indigo,
               ),
               title: Text("Início", style: TextStyle(fontFamily: "LatoBlackItalic"))),
           BubbleBottomBarItem(
-              backgroundColor: Colors.deepPurple,
+              backgroundColor: Colors.indigo,
               icon: Icon(
                 Icons.format_list_bulleted,
                 color: Colors.black,
               ),
               activeIcon: Icon(
                 Icons.format_list_bulleted,
-                color: Colors.deepPurple,
+                color: Colors.indigo,
               ),
               title: Text("Ramos", style: TextStyle(fontFamily: "LatoBlackItalic"))),
           BubbleBottomBarItem(
@@ -110,14 +110,14 @@ class _HomePageState extends State<HomePage>
               ),
               title: Text("Úteis", style: TextStyle(fontFamily: "LatoBlackItalic"))),
           BubbleBottomBarItem(
-              backgroundColor: Colors.green,
+              backgroundColor: Colors.indigo,
               icon: Icon(
                 Icons.menu,
                 color: Colors.black,
               ),
               activeIcon: Icon(
                 Icons.menu,
-                color: Colors.green,
+                color: Colors.indigo,
               ),
               title: Text("Menu", style: TextStyle(fontFamily: "LatoBlackItalic"),))
         ],

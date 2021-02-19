@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "779812915292",
-    "project_id": "guia-schnell-434a6",
-    "storage_bucket": "guia-schnell-434a6.appspot.com"
+    "project_number": "369974969046",
+    "project_id": "guiaschnell-g123",
+    "storage_bucket": "guiaschnell-g123.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:779812915292:android:0fe2f84919154b0b247e99",
+        "mobilesdk_app_id": "1:369974969046:android:6844e3add4a0e5c7833f77",
         "android_client_info": {
           "package_name": "br.com.desouzaguilherme29.g123_schnell"
         }
       },
       "oauth_client": [
         {
-          "client_id": "779812915292-h6sshko0n1invh5k31jd5aemdf0uf0rs.apps.googleusercontent.com",
+          "client_id": "369974969046-t5ch588o9qbfoiq41qn4vtfao9kqrvep.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "br.com.desouzaguilherme29.g123_schnell",
@@ -22,20 +22,20 @@
           }
         },
         {
-          "client_id": "779812915292-h0arsnqnvpf6e9h7p883g0i0umrn1q5g.apps.googleusercontent.com",
+          "client_id": "369974969046-u4vqjf8u37esstqg6crqbduks57pt0pb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB_MavWIqOQlWbdQBmrQWqyczsVbptBPy4"
+          "current_key": "AIzaSyA3j6tplNsalCHkRuh_Ycv5sDJBe1DR9K0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "779812915292-h0arsnqnvpf6e9h7p883g0i0umrn1q5g.apps.googleusercontent.com",
+              "client_id": "369974969046-u4vqjf8u37esstqg6crqbduks57pt0pb.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

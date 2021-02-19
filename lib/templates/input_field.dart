@@ -7,9 +7,11 @@ class InputField extends StatelessWidget {
   final String validateText;
   final bool autoFocus;
   final TextEditingController controller;
+  final TextInputType keytype;
+final int length;
+final int maxlength;
 
-
-  InputField({@required this.hint,@required  this.obscure,@required  this.icon,@required  this.controller,@required  this.validateText, @required this.autoFocus});
+  InputField({@required this.hint,@required  this.obscure,@required  this.icon,@required  this.controller,@required  this.validateText, @required this.autoFocus, @required this.keytype, @required int this.length, @required this.maxlength});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class InputField extends StatelessWidget {
       child: TextFormField(
         // ignore: missing_return
         validator: (value) {
-          if(value.isEmpty || value.length < 10){
+          if(value.isEmpty || value.length < length){
             return validateText;
           }
         },
@@ -31,12 +33,12 @@ class InputField extends StatelessWidget {
         controller: controller,
         obscureText: obscure,
         style: TextStyle(color: Colors.black38),
-        keyboardType: TextInputType.number,
-
+        keyboardType: keytype,
+maxLength: maxlength,
         decoration: InputDecoration(
             icon: Icon(
               icon,
-              color: Colors.black38,
+              color: Color.fromRGBO(2, 30, 105, 1.0),
               size: 28,
             ),
             //border: InputBorder.none,
@@ -48,7 +50,7 @@ class InputField extends StatelessWidget {
                 letterSpacing: 0.9,
                 fontFamily: "LatoLightItalic"),
             contentPadding:
-                EdgeInsets.only(top: 30, right: 30, bottom: 30, left: 5)),
+                EdgeInsets.only(top: 20, right: 20, bottom: 20, left: 5)),
       ),
     );
   }

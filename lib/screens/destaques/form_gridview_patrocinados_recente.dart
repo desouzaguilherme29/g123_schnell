@@ -67,7 +67,8 @@ class _FormViewPatrocinadosRecentementeState
                               itemCount: snapshot.data.length,
                               itemBuilder: (BuildContext context, int index) {
                                 //projectSnap.data[index][""]
-                                return GestureDetector(
+                                return
+                                  GestureDetector(
                                     onTap: () {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(

@@ -27,7 +27,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.779812915292-heetk422ol3fbek2shdvqlvunsivue5a</string>
+				<string>com.googleusercontent.apps.369974969046-dmcc0cnu47gtm81kl67o7k93085k77gn</string>
 			</array>
 		</dict>
 	</array>
@@ -35,6 +35,11 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

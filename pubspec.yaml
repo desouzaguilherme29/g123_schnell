@@ -41,7 +41,6 @@ dependencies:
   photo_view: ^0.10.2
   splash_screen_view: ^1.0.3
   date_format: ^1.0.9
-  flutter_open_whatsapp: ^0.1.2
   flutter_login: ^1.0.14
   social_media_buttons: ^0.1.2
   image_picker: ^0.6.7+17
@@ -52,12 +51,15 @@ dependencies:
   auth_buttons: ^0.0.4
   google_sign_in: ^4.5.9
   firebase_core: ^0.7.0
-  firebase_auth: ^0.20.0+1
+  firebase_auth: ^0.20.1
   motion_tab_bar: ^0.1.5
   bubble_bottom_bar: ^1.2.0
   direct_select_flutter: ^1.0.7
   filter_list: ^0.0.5
   search_cep: ^3.0.0+2
+  animated_splash_screen: ^1.0.1+2
+  custom_radio_grouped_button: any
+  firebase_messaging: 6.0.9
 
 dev_dependencies:
   flutter_test:
@@ -125,6 +127,7 @@ flutter:
     - imagens/loginimagem.png
     - imagens/no-image-icon.png
     - imagens/semresultados.png
+    - imagens/logoschnell.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
